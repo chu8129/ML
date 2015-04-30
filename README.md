@@ -5,4 +5,4 @@
 
 
 
-Mearching Learning
+Mechine Learning
