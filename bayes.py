@@ -43,7 +43,7 @@ def trianNB0(trainMatrix,trainCategory):
 	p1Vect = p1Num/p1Denom
 	p0Vect = p0Num/p0Denom
 	return p0Vect,p1Vect,pAbusive
-
+#改进的方法是：将p0num p1num改成1，总数为2，并取对数函数，将值变大；
 #
 #
 #
