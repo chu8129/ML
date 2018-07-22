@@ -1,0 +1,28 @@
+#导入数据
+from sklearn.datasets import load_iris
+iris=load_iris()
+iris.data
+iris.target
+X = irirs.data
+X = iris.data
+y = iris.target
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5)
+X_train, X_train_lr, y_train, y_train_lr = train_test_split(X_train, y_train, test_size=0.5)
+
+#gbdt特征组合
+from sklearn.ensemble import GradientBoostingClassifier
+n_estimator = 2
+grd = GradientBoostingClassifier(n_estimators=n_estimator)
+grd.fit(X_train, y_train)
+
+#onehot
+from sklearn.preprocessing import OneHotEncoder
+grd_enc = OneHotEncoder()
+grd_enc.fit(grd.apply(X_train)[:, :, 0])
+
+#加入lr，apply执行筛选特征
+from sklearn.linear_model import LogisticRegression
+grd_lm = LogisticRegression()
+grd_lm.fit(grd_enc.transform(grd.apply(X_train_lr)[:, :, 0]), y_train_lr)
+y_pred_grd_lm = grd_lm.predict_proba(grd_enc.transform(grd.apply(X_test)[:, :, 0]))[:, 1]
